@@ -129,7 +129,7 @@ def test_duplicate_registration(client, init_database):
         data=dict(username='user3', password='345', confirm='345', name='User3'),
         follow_redirects=True)
     
-    # Try registering with the same email address
+    # Try registering with the same username
     response = client.post('/register',
         data=dict(username='user3', password='345', confirm='345', name='User3'),
         follow_redirects=True)
