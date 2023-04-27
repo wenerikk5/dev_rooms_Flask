@@ -1,0 +1,33 @@
+﻿room_id,author_id,body
+1,2,Impressive list of changes!
+1,3,I still use 3.8
+2,5,Interesting
+3,4,After 5 years of using Java I still love it!
+3,5,Language is still developing!
+3,1,Classic OOP
+4,1,I think it's Python. Very universal language
+4,2,Start with Python ofc.
+4,3,"I started with JS, it is Ok as well."
+4,4,Do not start from C!
+4,4,I like Rust from first day!
+5,2,For sure not...marketing
+5,5,Rust must be 3-5 times faster!
+5,5,I think even Go is much faster.
+6,1,"True, haven't tried it yet but saw a lot of comparison charts."
+6,2,Low level complied language ofc is faster than iterperetated one...
+6,2,"I started to learn Rust, it is rlly different but all new concepts look very reasonable"
+6,5,"Save, reliable and fast language. All in one!"
+7,4,Already use it! Great!
+8,3,I started learning C in school. It looked so compicated.
+8,3,Linus loves it!
+9,2,"Yeah, my fried developes a lot of projects with it."
+9,5,Still demanded
+10,1,Sounds interesting..
+10,2,Let's have a look.
+11,2,"First of all you should have an Apple's device like Macbook Air or else, they have free books in iBook's library"
+11,5,There some dedicated channels in youtube. Check it
+12,1,Must have knowled for any backend or ML specialist
+12,3,I love declarative languages :)
+12,4,Recently found some usefull site for practicing of queries.
+12,4,"I actually never used it, only Django ORM"
+12,5,I would recommend to learn it before use of any ORM

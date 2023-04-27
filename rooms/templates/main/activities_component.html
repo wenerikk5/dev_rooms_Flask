@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header ">
+        <strong class="h6">RECENT ACTIVITIES</strong>
+    </div>
+
+    <div class="card-body px-2 py-2">
+        {% for message in room_messages %}
+        <div class="comment mb-2 bg-light border rounded px-2 py-2 ">
+            <small><a href="{{ url_for('main.profile', id=message.author.id) }}" class="font-link"><strong>@{{ message.author.name }}</strong></a></small>
+            <small>{{ message.created|timesince }} ago</small><br>
+            <small>replied to post</small><br>
+            <small><a href="{{ url_for('main.room_detail', id=message.room.id) }}" class="font-link-secondary font-weight-bold">{{ message.room.head }}</a></small>
+
+            <div class="border rounded bg-white text-dark my-1 px-2 py-2">
+                <small>
+                    {% if message.body|length > 28 %}
+                        {{ message.body[0:25] }}...
+                    {% else %}
+                        {{ message.body }}
+                    {% endif %}
+                </small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>

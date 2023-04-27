@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}Rooms{% endblock title %}</title>
+</head>
+<body class="bg-light">
+
+    <div class="container">
+
+        {% include 'messages.html' %}
+
+        <div class="bg-white">
+            {% include 'navbar.html' %}
+        </div>
+
+        {% block content %}
+
+        {% endblock content %}
+
+        <div class="bg-white">
+            {% include 'footer.html' %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>

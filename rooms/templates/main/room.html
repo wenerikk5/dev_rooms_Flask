@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-9">
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <small>{{ room.host.name }}<a href="{{ url_for('main.profile', id=room.host.id) }}" class="font-link"><strong>@{{ room.host.name }}</strong></a></small> <small>({{ room.updated|datetime }})</small>
+                </div>
+                <div>
+                    {% if current_user == room.host %}
+                        <a href="{{ url_for('main.room_edit', id=room.id) }}" class="badge bg-secondary text-light">edit</a>
+                        <a href="{{ url_for('main.room_delete', id=room.id) }}" class="badge bg-secondary text-light">delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>{{ room.head }}</strong></p>
+                <p>{{ room.description }}</p>
+                {% if room.link %}
+                    <p><a href="{{ room.link }}" class="font-link-secondary">{{ room.link }}</a></p>
+                {% endif %}
+                <div class="text-center my-1">
+                    {% if room.image_path %}
+                        <img class="img-fluid rounded" src="{{ url_for('static', filename='uploads/' + room.image_path) }}">
+                    {% endif %}
+                </div>
+                <p></p>
+                <div class="d-flex justify-content-end">
+                    <span class="badge bg-info text-light">{{ room.topic.name }}</span>
+                </div>
+                <div class="pl-5">
+
+                    {% for message in room_messages %}
+                    <div class="comment my-2 border rounded bg-light px-2 py-1 ">
+                        <div class=" d-flex justify-content-between">
+                            <div>
+                                <small><a href="{{ url_for('main.profile', id=message.author.id) }}" class="font-link"><strong>@{{ message.author.name }}</strong></a><span> ({{ message.created|timesince }} ago)</span></small>
+                            </div>
+                            <div>
+                                {% if current_user == message.author %}
+                                    <a href="{{ url_for('main.message_delete', id=message.id) }}" class="badge bg-secondary text-light">delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <p>{{ message.body }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% if current_user.is_authenticated %}
+                    <form action="" method="POST" class="mt-2">
+                        <input class="form-control bg-light" type="text" name="body" id="id_body" placeholder="Type your message ...">
+                    </form>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    participants-->
+    <div class="col-3">
+        <div class="card">
+            <div class="card-header ">
+                <strong class="h6">PARTICIPANTS</strong>
+            </div>
+
+            <div class="card-body px-2 py-2">
+                {% for u in participants %}
+                <div class="comment mb-2 bg-light border rounded px-2 py-2">
+                    <small>{{ u.name }}</small><br>
+                    <small><a href="{{ url_for('main.profile', id=u.id) }}" class="font-link"><strong>@{{ u.name }}</strong></a></small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

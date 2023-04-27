@@ -1,0 +1,7 @@
+<h6>BROWSE TOPICS</h6>
+<div class="list-group">
+    <a href="{{ url_for('main.index') }}" class="list-group-item list-group-item-action">All ({{ rooms_total }})</a>
+{% for topic in topics %}
+    <a href="{{ url_for('main.index')}}?q={{ topic.name }}" class="list-group-item list-group-item-action">{{ topic.name }} ({{ topic.rooms_count() }})</a>
+{% endfor %}
+</div>

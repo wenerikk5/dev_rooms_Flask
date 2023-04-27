@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-3 my-1" >
+        {% include 'main/topics_component.html' %}
+    </div>
+
+    <div class="col-6 my-1">
+        {% include 'main/feed_component.html' %}
+
+    </div>
+
+    <div class="col-3 my-1">
+        {% include 'main/activities_component.html' %}
+    </div>
+
+</div>
+
+{% endblock content %}

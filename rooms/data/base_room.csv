@@ -1,0 +1,13 @@
+﻿id,host_id,head,description,topic_id,image,link
+1,2,What’s New In Python 3.11,"Python 3.11 is between 10-60% faster than Python 3.10. On average, we measured a 1.25x speedup on the standard benchmark suite. See Faster CPython for details.",1,,https://docs.python.org/3/whatsnew/3.11.html
+2,3,What’s New In Python 3.7,"PEP 563, postponed evaluation of type annotations.Backwards incompatible syntax changes",1,base/6.png,
+3,2,Free Java Update 8. Version 8 Update 361,"JDK 8u361 contains IANA time zone data 2022d, 2022e, 2022f.",9,,
+4,5,Best language for start in IT,Most popular advice to start from Python.,1,,
+11,3,Source to learn Swift,Any advise on how to start learning of Swift for iOS dev?,6,,
+6,4,Rust is really very fast ,Very loved language with might replace C,5,base/7.png,https://programming-language-benchmarks.vercel.app/python-vs-rust
+7,5,Django 4.1 has added async functionality,"See updates, async is supported!",7,base/5.png,
+8,2,Hardcore classic C and C++,Is it worth to learn it in 2023?,2,,
+9,4,PHP is still usefull in backend,Laravel web framework is still demanded in the market.,3,base/4.png,https://laravel.com/
+10,5,Any comparison of Zig's performance?,Is there any real test comparison of this language in web?,11,base/3.png,
+5,3,Is it really blazingly fast?,Pretty surprising statement...,10,base/1.png,https://betterprogramming.pub/how-to-build-blazing-fast-rest-apis-with-node-js-mongodb-fastify-and-swagger-114e062db0c9
+12,2,Introduction to databases,Let's start from relational databases. They use SQL language.,4,base/2.png,https://www.digitalocean.com/community/conceptual-articles/an-introduction-to-databases

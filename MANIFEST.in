@@ -1,0 +1,5 @@
+include rooms/
+graft rooms/static
+graft rooms/templates
+graft rooms/data
+global-exclude *.pyc

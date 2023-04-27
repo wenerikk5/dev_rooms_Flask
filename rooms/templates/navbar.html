@@ -1,0 +1,30 @@
+
+<div class="row align-items-center pt-2">
+
+  <div class="col-3">
+    <h1><a href="{{ url_for('main.index') }}" class=""><img src="{{ url_for('static', filename='images/dev.png') }}" style="width: 130px; height: 40px;" class="ml-5 mt-2" alt="LOGO"></a></h1>
+  </div>
+
+  <div class="col-7">
+    <form class="form-inline" method="GET" action="{{ url_for('main.index') }}">
+      <input class="form-control mr-sm-2 bg-light" type="search"  name="q" placeholder="Search ..." aria-label="Search">
+    </form>
+  </div>
+
+  <div class="col-2 d-flex flex-column align-items-center">
+    {% if current_user.is_authenticated %}
+      <div class="">
+        <small>Welcome, <a href="{{ url_for('main.profile', id=current_user.id) }}" class="font-link"><strong>@{{ current_user.name }}</strong></a></small>
+      </div>
+      <div class="justify-content-center">
+        <a href="{{ url_for('auth.logout') }}" class="badge bg-secondary text-light">Logout</a>
+      </div>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}"><button class="btn btn-outline-secondary">Login</button></a>
+    {% endif %}
+  </div>
+
+</div>
+<hr>
+
+

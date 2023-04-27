@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;500;700&display=swap");
+
+* {
+  font-family: "Roboto Flex", BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+
+.font-link {
+    color: #5dade2;
+}
+
+.font-link-secondary {
+    color: #57acc5;
+}
+
+.font-dark {
+    color: #393e46;
+}
+
+.bg-main2 {
+    background-color: #F1C40F;
+}
+
