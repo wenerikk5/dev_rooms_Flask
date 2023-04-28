@@ -21,8 +21,6 @@ pluggy==1.0.0
 pytest==7.3.1
 pytest-cov==4.0.0
 python-dotenv==1.0.0
-# Editable install with no version control (rooms==0.0.0)
--e /home/nwen/Documents/Dev3/dev_rooms_Flask
 SQLAlchemy==2.0.6
 SQLAlchemy-ImageAttach==1.1.0
 tomli==2.0.1
