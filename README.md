@@ -1,4 +1,4 @@
-# dev_rooms_on_Flask
+# dev_rooms_Flask
 
 ## Description
 
@@ -7,6 +7,8 @@ Copy of my dev_rooms project developed early on Django.
 A draft of public site for devs to discuss different topics related with programming languages. Has been built on Flask with Jinja2 Templates + Flask SQLAlchemy + Alembic + Flask-Login + Bootstrap styling. Main functionality has been covered by Pytests (84% coverage).
 
 ## Set up and use
+
+All commands should be executed from main directory (dev_rooms_Flask)
 
 ```
 # Create and activate virtual environment
@@ -21,7 +23,7 @@ mv .env-example .env
 
 # OPTIONAL: commands to handle migrations (initiate, update).  
 # NOTE. Update works only for adding and removing of exist tables fields and do not handle renaming of exist fields.
-falsk db init 
+flask db init 
 flask db migrate
 flask db update
 
@@ -35,6 +37,16 @@ flask run # make sure that .env file is in place
 # Username: mike
 # Password: Abc123123
 
+```
+
+## Testing
+
+```
+# Run Pytests in verbose mode
+python -m pytest -v
+
+# Coverage
+python -m pytest --cov-report term-missing --cov=rooms
 ```
 
 ## Additional info
