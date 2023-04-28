@@ -58,5 +58,6 @@ python -m pytest --cov-report term-missing --cov=rooms
 Created for educational purposes. 
 
 ## Preview
-<img src="https://github.com/wenerikk5/dev_rooms/blob/06d2abc16d5cbdbf38f508d0ce39be0b6125d029/media/base/Preview.png" alt="img" width="800" height='600'>
+<img src="https://github.com/wenerikk5/dev_rooms_Flask/blob/7ff2b002b5f95f879b31ba863e07e3038a14e7b3/rooms/static/uploads/base/Preview.png" alt="img" width="800" height='600'>
+
 
