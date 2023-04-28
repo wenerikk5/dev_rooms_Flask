@@ -22,16 +22,20 @@ pip install -r requirements.txt
 mv .env-example .env
 
 # OPTIONAL: commands to handle migrations (initiate, update).  
-# NOTE. Update works only for adding and removing of exist tables fields and do not handle renaming of exist fields.
+# NOTE: Update works only for adding and removing of exist tables fields 
+# and do not handle renaming of exist fields.
 flask db init 
 flask db migrate
 flask db update
 
-# OPTIONAL: Fill database with test data (for all tables)
+# OPTIONAL: Fill database with test data (for all tables). 
+# NOTE: Before filling run server at least once in order to create database file.
 flask import_data # adds (in order) users, topics, rooms and messages.
 
 # Run server (default in Debug mode)
 flask run # make sure that .env file is in place
+
+# Stop server with Ctrl + C
 
 # Test user data:
 # Username: mike
