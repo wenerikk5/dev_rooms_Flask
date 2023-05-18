@@ -30,9 +30,12 @@ def import_data_command():
                     item = User(
                         username=row['username'],
                         password=row['password'],
+                        email=row['email'],
                         name=row['name']                
                     )
-                    item.id=int(row['user_id'])
+                    item.about_me = row['about_me']
+                    item.joined = datetime.utcnow()
+                    item.id = int(row['user_id'])
 
                 if model == 'Topic':
                     item = Topic(row['name'])

@@ -1,0 +1,2 @@
+FLASK_APP=rooms
+FLASK_DEBUG=True

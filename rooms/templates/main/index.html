@@ -20,3 +20,12 @@
 </div>
 
 {% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
+    <script>
+
+    </script>
+{% endblock scripts %}

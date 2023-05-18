@@ -9,12 +9,16 @@
     </div>
 
     <div class="col-6 my-1">
-        <div class="text-center my-4">
-            <h5>Sample User</h5>
-            <p class="font-link"><strong>@{{ user.name }}</strong></p>
+        <div class="text-center mt-4 py-1">
+            <img  alt="avatar" class="img-thumbnail" src="{{ user.avatar(128) }}">
         </div>
-        <h6 class="text-secondary">ABOUT</h6>
-        <p>Some information about Sample User skills.  </p>
+
+        <h6 class="text-secondary mt-4">USER</h6>
+        {{ user.name }}<strong class="font-link">@{{ user.name }}</strong>
+        (member since {{ moment(user.joined).format('LL') }})
+
+        <h6 class="text-secondary mt-4">ABOUT</h6>
+        <p>{{ user.about_me }}</p>
         <h6 class="text-secondary mt-4">PARTICIPATED ROOMS</h6>
 
         {% for room in rooms %}
@@ -54,3 +58,12 @@
 </div>
 
 {% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
+    <script>
+
+    </script>
+{% endblock scripts %}

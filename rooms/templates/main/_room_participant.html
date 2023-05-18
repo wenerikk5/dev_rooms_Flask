@@ -1,0 +1,6 @@
+<div class="row1 bg-light border rounded mb-2 px-2 py-2">
+    <div class="mx-0 px-0">
+        <img class="rounded border" alt="avatar" src="{{ u.avatar(44) }}">
+        <small><a href="{{ url_for('main.profile', id=u.id) }}" class="font-link"><strong>@{{ u.name }}</strong></a></small>
+    </div>
+</div>

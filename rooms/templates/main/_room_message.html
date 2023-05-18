@@ -1,0 +1,18 @@
+<div class="row my-2 mx-0">
+    <div class="col-1 mx-0 px-0 align-self-top">
+        <img class="img-thumbnail" alt="avatar" src="{{ message.author.avatar(59) }}">
+    </div>
+    
+    <div class="col-11 bg-light rounded mx-0 pl-1 pr-0">
+        <div class="d-flex justify-content-between my-0 pt-1 pr-1">
+            <small><a href="{{ url_for('main.profile', id=message.author.id) }}" class="font-link"><strong>@{{ message.author.name }}</strong></a><span> ({{ moment(message.created).fromNow() }})</span></small>
+            {% if current_user == message.author %}
+                <a href="{{ url_for('main.message_delete', id=message.id) }}" class="badge bg-secondary text-light">delete</a>
+            {% endif %}
+        </div>
+
+        <p class="mt-1 mb-0 pr-1 pb-1">{{ message.body }}</p>
+    </div>
+</div>
+
+

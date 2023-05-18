@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div>
-                    <small>{{ room.host.name }}<a href="{{ url_for('main.profile', id=room.host.id) }}" class="font-link"><strong>@{{ room.host.name }}</strong></a></small> <small>({{ room.updated|datetime }})</small>
+                    <small>{{ room.host.name }}<a href="{{ url_for('main.profile', id=room.host.id) }}" class="font-link"><strong>@{{ room.host.name }}</strong></a></small> <small>({{ moment(room.updated).format('LLL') }})</small>
                 </div>
                 <div>
                     {% if current_user == room.host %}
@@ -33,24 +33,11 @@
                 <div class="d-flex justify-content-end">
                     <span class="badge bg-info text-light">{{ room.topic.name }}</span>
                 </div>
-                <div class="pl-5">
+                <div class="">
 
                     {% for message in room_messages %}
-                    <div class="comment my-2 border rounded bg-light px-2 py-1 ">
-                        <div class=" d-flex justify-content-between">
-                            <div>
-                                <small><a href="{{ url_for('main.profile', id=message.author.id) }}" class="font-link"><strong>@{{ message.author.name }}</strong></a><span> ({{ message.created|timesince }} ago)</span></small>
-                            </div>
-                            <div>
-                                {% if current_user == message.author %}
-                                    <a href="{{ url_for('main.message_delete', id=message.id) }}" class="badge bg-secondary text-light">delete</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <p>{{ message.body }}</p>
-                        </div>
-                    </div>
+                        {% include 'main/_room_message.html' %}
+
                     {% endfor %}
 
                     {% if current_user.is_authenticated %}
@@ -72,10 +59,7 @@
 
             <div class="card-body px-2 py-2">
                 {% for u in participants %}
-                <div class="comment mb-2 bg-light border rounded px-2 py-2">
-                    <small>{{ u.name }}</small><br>
-                    <small><a href="{{ url_for('main.profile', id=u.id) }}" class="font-link"><strong>@{{ u.name }}</strong></a></small>
-                </div>
+                    {% include 'main/_room_participant.html' %}
                 {% endfor %}
             </div>
         </div>
@@ -85,3 +69,12 @@
 
 
 {% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
+    <script>
+
+    </script>
+{% endblock scripts %}

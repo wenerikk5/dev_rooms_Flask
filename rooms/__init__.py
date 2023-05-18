@@ -6,6 +6,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_moment import Moment
 
 
 db = SQLAlchemy()
@@ -25,10 +26,11 @@ def create_app(config_filename=None):
         app.config.from_object(config_type)
 
     initialise_extensions(app)
-    custom_filters(app)
     register_blueprints(app)
     register_cli_commands(app)
     error_handlers(app)
+    moment = Moment(app)
+    custom_filters(app)
 
     with app.app_context():
         db.create_all()
@@ -37,19 +39,20 @@ def create_app(config_filename=None):
 
 
 def custom_filters(app):
-    @app.template_filter()
-    def datetime(value, format='medium'):
-        if format == 'full':
-            format="EEEE, d. MMMM y 'at' HH:mm"
-        elif format == 'medium':
-            format="EE dd.MM.y HH:mm"
-        return format_datetime(value, format)
-    
-    from datetime import datetime
-    @app.template_filter()
-    def timesince(value):
-        return format_timedelta(datetime.utcnow() - value)
-    
+    # @app.template_filter()
+    # def datetime(value, format='medium'):
+    #     if format == 'full':
+    #         format="EEEE, d. MMMM y 'at' HH:mm"
+    #     elif format == 'medium':
+    #         format="EE dd.MM.y HH:mm"
+    #     return format_datetime(value, format)
+    #
+    # from datetime import datetime
+    # @app.template_filter()
+    # def timesince(value):
+    #     return format_timedelta(datetime.utcnow() - value)
+
+
     @app.template_filter()
     def length(value):
         return len(value)

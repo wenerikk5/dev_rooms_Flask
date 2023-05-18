@@ -27,6 +27,8 @@
             {% include 'footer.html' %}
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% block scripts %}
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% endblock scripts %}
 </body>
 </html>

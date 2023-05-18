@@ -1,4 +1,5 @@
 from datetime import datetime
+from hashlib import md5
 
 from flask_login import UserMixin
 
@@ -17,9 +18,12 @@ room_user_m2m = db.Table(
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
+    username = db.Column(db.String(100), unique=True, nullable=False, index=True)
     password = db.Column(db.String(255), nullable=False)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(140))
+    email = db.Column(db.String(120), index=True, unique=True)
+    about_me = db.Column(db.String(140))
+    joined = db.Column(db.DateTime, default=datetime.utcnow)
 
     room_participants = db.relationship(
         'Room',
@@ -27,25 +31,31 @@ class User(UserMixin, db.Model):
         cascade="all, delete"
     )
 
-    def __init__(self, username, password, name):
+    def __init__(self, username, password, email, name):
         self.username = username
         self.password = generate_password_hash(password)
+        if email:
+            self.email = email
         if name:
             self.name = name
+
+    def __repr__(self):
+        return self.username
+
+    def set_password(self, password: str):
+        self.password = generate_password_hash(password)
 
     def check_password(self, pwd: str):
         return check_password_hash(self.password, pwd)
     
-    def set_password(self, password: str):
-        self.password = generate_password_hash(password)
-
-    def __repr__(self):
-        return self.username   
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
 
 class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(50), unique=True, nullable=False, index=True)
 
     def __init__(self, name):
         self.name = name
@@ -74,7 +84,7 @@ class Message(db.Model):
 
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    head = db.Column(db.String(80), nullable=False)
+    head = db.Column(db.String(80), nullable=False, index=True)
     description = db.Column(db.Text())
     link = db.Column(db.String(255))
     created = db.Column(db.DateTime, index=True, default=datetime.utcnow)

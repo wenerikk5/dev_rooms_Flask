@@ -1,0 +1,24 @@
+<div class="row mt-1 mb-2 mx-0 comment bg-light border rounded">
+    <div class="col-2 mx-0 px-0 py-2 align-self-top pl-2">
+        <img class="rounded border" alt="avatar" src="{{ message.author.avatar(28) }}">
+    </div>
+    
+    <div class="col-10 bg-light rounded mx-0 my-0 px-0 py-0 pl-2">
+        <div class="">
+            <small><a href="{{ url_for('main.profile', id=message.author.id) }}" class="font-link"><strong>@{{ message.author.name }}</strong></a><span> ({{ moment(message.created).fromNow() }})</span></small>
+            <br><small>replied to post</small><br>
+            <p class="my-0 pb-1"><small><a href="{{ url_for('main.room_detail', id=message.room.id) }}" class="font-link-secondary font-weight-bold">{{ message.room.head }}</a></small></p>
+        </div>
+    </div>
+    <div class="col-11 border rounded bg-white text-dark mb-2 mx-2 px-2 py-2">
+        <small>
+            {% if message.body|length > 28 %}
+                {{ message.body[0:25] }}...
+            {% else %}
+                {{ message.body }}
+            {% endif %}
+        </small>
+    </div>
+</div>
+
+

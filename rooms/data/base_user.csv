@@ -1,6 +1,6 @@
-﻿user_id,username,password,name
-1,root,123,Root
-4,rebecca,Abc123123,Rebecca
-5,tom,Abc123123,Tom
-3,john,Abc123123,John
-2,mike,Abc123123,Mike
+﻿user_id,username,password,name,email,about_me
+1,root,123,Root,root@root.com,Web developer with 20+ years expirience.
+4,rebecca,Abc123123,Rebecca,rebecca@gmail.com,Expert in Web Design and DevOps.
+5,tom,Abc123123,Tom,tom@gmail.com,Lead in Machine Learning and PhD in Math.
+3,john,Abc123123,John,john@gmail.com,Strive to become a pro in Software Developement.
+2,mike,Abc123123,Mike,mike@gmail.com, Expert and mentor in WebDev.
