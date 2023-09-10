@@ -13,7 +13,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
-ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 def create_app(config_filename=None):
@@ -29,8 +29,8 @@ def create_app(config_filename=None):
     register_blueprints(app)
     register_cli_commands(app)
     error_handlers(app)
-    moment = Moment(app)
     custom_filters(app)
+    moment = Moment(app)
 
     with app.app_context():
         db.create_all()
@@ -51,7 +51,6 @@ def custom_filters(app):
     # @app.template_filter()
     # def timesince(value):
     #     return format_timedelta(datetime.utcnow() - value)
-
 
     @app.template_filter()
     def length(value):

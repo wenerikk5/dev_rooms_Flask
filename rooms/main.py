@@ -14,7 +14,8 @@ main = Blueprint('main', __name__)
 
 
 def allowed_file(filename):
-    return '.' in filename and filename.lower().rsplit('.', 1)[1] in ALLOWED_IMAGE_EXTENSIONS
+    return '.' in filename and \
+        filename.lower().rsplit('.', 1)[1] in ALLOWED_IMAGE_EXTENSIONS
 
 
 @main.route('/')
@@ -26,10 +27,13 @@ def index():
     rooms = Room.query.order_by(Room.updated.desc()).all()
 
     if q:
-        topics_filtered = Topic.query.filter(Topic.name.like('%' + q + '%')).all()
+        topics_filtered = Topic.query \
+                            .filter(Topic.name.like('%' + q + '%')) \
+                            .all()
 
         if len(topics_filtered) > 0:
-            rooms = Room.query.filter(Room.topic == topics_filtered[0]) \
+            rooms = Room.query \
+                    .filter(Room.topic == topics_filtered[0]) \
                     .order_by(Room.updated.desc()) \
                     .all()
         else:
@@ -60,7 +64,9 @@ def profile(id):
     user = db.session.get(User, id)
     # rooms = Room.query.filter(user.id.in_(Room.participants)).all()
     topics = Topic.query.order_by(Topic.name).all()
-    room_messages = Message.query.filter(Message.author == user).order_by(Message.created.desc()).all()
+    room_messages = Message.query \
+                           .filter(Message.author == user) \
+                           .order_by(Message.created.desc()).all()
     rooms_total = db.session.query(Room).count()
 
     context = {
@@ -80,7 +86,8 @@ def room_detail(id):
     if not room:
         abort(404, "Room do not exist.")
 
-    room_messages = Message.query.filter(Message.room == room).order_by(Message.created.desc())
+    room_messages = (Message.query.filter(Message.room == room)
+                                  .order_by(Message.created.desc()))
 
     if request.method == 'POST':
         if current_user.is_authenticated:
@@ -139,16 +146,24 @@ def room_create():
         if image:
             filename = secure_filename(image.filename)
             if allowed_file(image.filename):
-                image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+                image.save(os.path.join(current_app.config['UPLOAD_FOLDER'],
+                                        filename))
             else:
                 flash('Not supported image extension.', 'danger')
-                return render_template('main/create_room.html', form=form, topics=topics)
+                return render_template('main/create_room.html',
+                                       form=form,
+                                       topics=topics)
 
-        existing_room = Room.query.filter(Room.head == head, Room.topic == topic).first()
+        existing_room = Room.query \
+                            .filter(Room.head == head, Room.topic == topic) \
+                            .first()
 
         if existing_room:
-            flash('Room with such head and topic is already exists.', 'danger')
-            return render_template('main/create_room.html', form=form, topics=topics)
+            flash('Room with such head and topic is already exists.',
+                  'danger')
+            return render_template('main/create_room.html',
+                                   form=form,
+                                   topics=topics)
         else:
             room = Room(
                 head=head,
@@ -166,7 +181,9 @@ def room_create():
     if form.errors:
         flash(form.errors, 'danger')
 
-    return render_template('main/create_room.html', form=form, topics=topics)
+    return render_template('main/create_room.html',
+                           form=form,
+                           topics=topics)
 
 
 @main.route('/<int:id>/room-edit', methods=('GET', 'POST'))
@@ -177,7 +194,7 @@ def room_edit(id):
     topics = db.session.query(Topic).all()
 
     if not room:
-        flash("Room doesn't esixt.", 'danger')
+        flash("Room doesn't exist.", 'danger')
         return redirect(url_for('main.index'))
     elif current_user != room.host:
         flash('You are not allowed to modify this room.', 'danger')
@@ -203,10 +220,14 @@ def room_edit(id):
         if image:
             filename = secure_filename(image.filename)
             if allowed_file(image.filename):
-                image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+                image.save(os.path.join(current_app.config['UPLOAD_FOLDER'],
+                                        filename))
             else:
                 flash('Not supported image extension.', 'danger')
-                return render_template('main/create_room.html', room=room, form=form, topics=topics)
+                return render_template('main/create_room.html',
+                                       room=room,
+                                       form=form,
+                                       topics=topics)
 
         room.head = head or room.head
         room.description = description or room.description
@@ -215,11 +236,17 @@ def room_edit(id):
         room.image_path = filename
         room.updated = datetime.datetime.utcnow()
 
-        existing_rooms = Room.query.filter(Room.head == head, Room.topic == topic).all()
+        existing_rooms = Room.query \
+                             .filter(Room.head == head, Room.topic == topic) \
+                             .all()
 
         if len(existing_rooms) > 1:
-            flash('There is other existing room with such head and topic.', 'danger')
-            return render_template('main/create_room.html', room=room, form=form, topics=topics)         
+            flash('There is other existing room with such head and topic.',
+                  'danger')
+            return render_template('main/create_room.html',
+                                   room=room,
+                                   form=form,
+                                   topics=topics)
         else:
             db.session.add(room)
             db.session.commit()
@@ -229,7 +256,10 @@ def room_edit(id):
     if form.errors:
         flash(form.errors, 'danger')
 
-    return render_template('main/create_room.html', room=room, form=form, topics=topics)
+    return render_template('main/create_room.html',
+                           room=room,
+                           form=form,
+                           topics=topics)
 
 
 @main.route('/<int:id>/room-delete', methods=('GET', 'POST'))

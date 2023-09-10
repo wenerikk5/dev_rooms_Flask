@@ -18,7 +18,10 @@ room_user_m2m = db.Table(
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False, index=True)
+    username = db.Column(db.String(100),
+                         unique=True,
+                         nullable=False,
+                         index=True)
     password = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(140))
     email = db.Column(db.String(120), index=True, unique=True)
@@ -76,7 +79,8 @@ class Message(db.Model):
     created = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
 
-    author = db.relationship('User', backref=db.backref('message', lazy='dynamic'))
+    author = db.relationship('User',
+                             backref=db.backref('message', lazy='dynamic'))
 
     def __repr__(self):
         return self.body[0:30]
@@ -95,7 +99,9 @@ class Room(db.Model):
 
     host = db.relationship('User', backref=db.backref('room', lazy='dynamic'))
     topic = db.relationship('Topic', backref=db.backref('room', lazy='dynamic'))
-    messages = db.relationship('Message', backref=db.backref('room'), cascade="all, delete")
+    messages = db.relationship('Message',
+                               backref=db.backref('room'),
+                               cascade="all, delete")
     participants = db.relationship(
         'User',
         secondary=room_user_m2m,
