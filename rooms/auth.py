@@ -14,22 +14,22 @@ def register():
     if current_user.is_authenticated:
         flash('You are already logged in.', 'info')
         return redirect(url_for('main.index'))
-    
+
     form = RegistrationForm()
 
     if form.validate_on_submit():
         username = request.form.get('username')
         name = request.form.get('name')
         password = request.form.get('password')
- 
+
         existing_username = User.query.filter_by(username=username).first()
 
         if existing_username:
             flash('This username is already taken. Try another one.', 'warning')
             return render_template('main/register.html', form=form)
-        
+
         user = User(username, password, name)
-        
+
         db.session.add(user)
         db.session.commit()
         flash('You are now registered. Please login.', 'success')
@@ -44,9 +44,9 @@ def login():
     if current_user.is_authenticated:
         flash('You are already logged in.', 'info')
         return redirect(url_for('main.index'))
-    
+
     form = LoginForm()
-    
+
     if form.validate_on_submit():
         username = request.form.get('username')
         password = request.form.get('password')

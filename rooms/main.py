@@ -27,7 +27,7 @@ def index():
 
     if q:
         topics_filtered = Topic.query.filter(Topic.name.like('%' + q + '%')).all()
-        
+
         if len(topics_filtered) > 0:
             rooms = Room.query.filter(Room.topic == topics_filtered[0]) \
                     .order_by(Room.updated.desc()) \
@@ -62,7 +62,7 @@ def profile(id):
     topics = Topic.query.order_by(Topic.name).all()
     room_messages = Message.query.filter(Message.author == user).order_by(Message.created.desc()).all()
     rooms_total = db.session.query(Room).count()
-    
+
     context = {
         'user': user,
         'topics': topics,
@@ -89,7 +89,7 @@ def room_detail(id):
 
             if not body:
                 error = 'Message text is required.'
-            
+
             if error is not None:
                 flash(error, 'danger')
             else:
@@ -126,7 +126,7 @@ def room_create():
         topic_name = request.form.get('topic')
         link = form.link.data
         image = form.image.data
-        
+
         topic = Topic.query.filter(Topic.name == topic_name).first()
 
         # Create topic if it's not exist yet.
@@ -162,7 +162,7 @@ def room_create():
             db.session.add(room)
             db.session.commit()
             return redirect(url_for('main.index'))
-    
+
     if form.errors:
         flash(form.errors, 'danger')
 
@@ -182,7 +182,7 @@ def room_edit(id):
     elif current_user != room.host:
         flash('You are not allowed to modify this room.', 'danger')
         return redirect(url_for('main.index'))
-    
+
     if form.validate_on_submit():
         head = form.head.data
         description = form.description.data
@@ -197,7 +197,7 @@ def room_edit(id):
             topic = Topic(topic_name)
             db.session.add(topic)
             db.session.commit()
-        
+
         filename = room.image_path
 
         if image:
@@ -207,7 +207,7 @@ def room_edit(id):
             else:
                 flash('Not supported image extension.', 'danger')
                 return render_template('main/create_room.html', room=room, form=form, topics=topics)
-        
+
         room.head = head or room.head
         room.description = description or room.description
         room.topic = topic or room.topic
@@ -225,7 +225,7 @@ def room_edit(id):
             db.session.commit()
             flash('Room is updated.', 'success')
             return redirect(url_for('main.index'))
-    
+
     if form.errors:
         flash(form.errors, 'danger')
 
@@ -242,11 +242,11 @@ def room_delete(id):
         error = "Room do not exist."
     elif current_user != room.host:
         error = 'You are not allowed to delete this room.'
-    
+
     if error:
         flash(error, 'danger')
         return redirect(url_for('main.index'))
-    
+
     if request.method == 'POST':
         db.session.delete(room)
         db.session.commit()
@@ -266,11 +266,11 @@ def message_delete(id):
         error = "Message do not exist."
     elif current_user != message.author:
         error = 'You are not allowed to delete this message.'
-    
+
     if error:
         flash(error, 'danger')
         return redirect(url_for('main.room_detail', id=message.room.id))
-    
+
     if request.method == 'POST':
         room_id = message.room.id
         db.session.delete(message)

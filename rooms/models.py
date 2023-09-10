@@ -47,7 +47,7 @@ class User(UserMixin, db.Model):
 
     def check_password(self, pwd: str):
         return check_password_hash(self.password, pwd)
-    
+
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
@@ -67,7 +67,7 @@ class Topic(db.Model):
 
     def __repr__(self):
         return self.name
-    
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +77,7 @@ class Message(db.Model):
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
 
     author = db.relationship('User', backref=db.backref('message', lazy='dynamic'))
-    
+
     def __repr__(self):
         return self.body[0:30]
 
@@ -107,4 +107,3 @@ class Room(db.Model):
 
     def __repr__(self):
         return f'Room {self.head}'
-    

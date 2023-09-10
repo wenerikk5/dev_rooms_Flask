@@ -14,6 +14,7 @@ Models = {
     'room_user_m2m': 'base_room_participants.csv',
 }
 
+
 @click.command('import_data')
 def import_data_command():
     """Fill db with test data."""
@@ -31,7 +32,7 @@ def import_data_command():
                         username=row['username'],
                         password=row['password'],
                         email=row['email'],
-                        name=row['name']                
+                        name=row['name']
                     )
                     item.about_me = row['about_me']
                     item.joined = datetime.utcnow()
@@ -65,7 +66,7 @@ def import_data_command():
                         body=row['body']
                     )
                     item.created = datetime.utcnow()
-                
+
                 if model == 'room_user_m2m':
                     user = db.session.get(User, int(row['user_id']))
                     item = db.session.get(Room, int(row['room_id']))
@@ -76,4 +77,3 @@ def import_data_command():
                 db.session.commit()
 
     click.echo('All test data is added successfully.')
-

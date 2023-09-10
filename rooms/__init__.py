@@ -18,7 +18,7 @@ ALLOWED_IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def create_app(config_filename=None):
     app = Flask(__name__)
-    
+
     if config_filename:
         app.config.from_object(config_filename)
     else:
@@ -56,7 +56,8 @@ def custom_filters(app):
     @app.template_filter()
     def length(value):
         return len(value)
- 
+
+
 def initialise_extensions(app):
     db.init_app(app)
     migrate = Migrate(app, db)
@@ -66,7 +67,8 @@ def initialise_extensions(app):
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id)) 
+        return User.query.get(int(user_id))
+
 
 def register_blueprints(app):
     from rooms.auth import auth as auth_blueprint
@@ -75,9 +77,11 @@ def register_blueprints(app):
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(main_blueprint)
 
+
 def register_cli_commands(app):
     from .commands import import_data_command
     app.cli.add_command(import_data_command)
+
 
 def error_handlers(app):
     @app.errorhandler(404)
@@ -87,4 +91,3 @@ def error_handlers(app):
     @app.errorhandler(500)
     def internal_error(error):
         return render_template('errors/500.html'), 500
-    
