@@ -35,18 +35,16 @@ flask import_data # adds (in order) users, topics, rooms and messages.
 # Run server (default in Debug mode)
 flask run # make sure that .env file is in place
 
-# OPTIONAL STEP: commands to handle migrations (initiate, update).  
+# OPTIONAL STEP: commands to handle migrations (initiate, update).
+# NOTE: Update works only for adding and removing of exist tables fields 
+# and do not handle renaming of exist fields.
 flask db init 
 flask db migrate
 flask db update
 
-
 # Test user data:
 # Username: mike
 # Password: Abc123123
-
-# NOTE: Update works only for adding and removing of exist tables fields 
-# and do not handle renaming of exist fields.
 
 ```
 
