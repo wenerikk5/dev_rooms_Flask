@@ -2,7 +2,7 @@
 
 ## Description
 
-Copy of my dev_rooms project developed early on Django.
+Copy of my dev_rooms project developed earlier on Django.
 
 A draft of public site for devs to discuss different topics related with programming languages. Has been built on Flask with Jinja2 Templates + Flask SQLAlchemy + Alembic + Flask-Login + Bootstrap styling. Main functionality has been covered by Pytests (84% coverage).
 
